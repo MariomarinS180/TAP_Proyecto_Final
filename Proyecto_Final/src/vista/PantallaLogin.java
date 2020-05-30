@@ -16,12 +16,6 @@ import javax.swing.border.Border;
  * @author DiscoDurodeRoer
  */
 
-class Prueba{
-	
-}
-
-
-
 class FondoSwing implements Border {
     private BufferedImage mImagen = null;
     /**
@@ -55,6 +49,7 @@ public class PantallaLogin extends JFrame {
 	JLabel label_usuario, label_contraseña;
 	JTextField caja_usuario, caja_contraseña; 
 	JButton boton_acceder, boton_crear; 
+	
 	public PantallaLogin() {
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
