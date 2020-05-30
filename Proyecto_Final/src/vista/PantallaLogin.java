@@ -15,13 +15,8 @@ import javax.swing.border.Border;
 /**
  * @author DiscoDurodeRoer
  */
-
 class FondoSwing implements Border {
     private BufferedImage mImagen = null;
-    /**
-     * Constructor, indicamos la imagen que queremos que se redimensione
-     * @param pImagen ImageIO.read(new File(ruta imagen))
-     */
     public FondoSwing(BufferedImage pImagen) {
         mImagen = pImagen;       
     }
@@ -38,11 +33,6 @@ class FondoSwing implements Border {
     @Override
     public boolean isBorderOpaque() {
         return true;
-        
-        
-        
-        
-        
     }
 }
 public class PantallaLogin extends JFrame {
