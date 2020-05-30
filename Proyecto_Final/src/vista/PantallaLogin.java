@@ -116,8 +116,12 @@ public class PantallaLogin extends JFrame {
 	add(boton_Restablecer); 
 	boton_Restablecer.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
+			if (caja_contraseña.getText().equals("") && caja_usuario.getText().equals("")) {
+				JOptionPane.showMessageDialog(getParent(), "NO HAY NADA QUE RESTABLECER", "MENSAJE", JOptionPane.ERROR_MESSAGE);
+			}else {
 			caja_contraseña.setText("");
 			caja_usuario.setText("");
+			}
 		}
 	});//BotonRestablecer
 	}//Contrusctor PantallaLogin
