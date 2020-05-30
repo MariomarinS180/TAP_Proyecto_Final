@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,6 +15,13 @@ import javax.swing.border.Border;
 /**
  * @author DiscoDurodeRoer
  */
+
+class Prueba{
+	
+}
+
+
+
 class FondoSwing implements Border {
     private BufferedImage mImagen = null;
     /**
@@ -36,6 +44,11 @@ class FondoSwing implements Border {
     @Override
     public boolean isBorderOpaque() {
         return true;
+        
+        
+        
+        
+        
     }
 }
 public class PantallaLogin extends JFrame {
@@ -75,17 +88,10 @@ public class PantallaLogin extends JFrame {
 	boton_acceder.setBounds(140, 225, 100, 30);
 	add(boton_acceder); 
 	
-	boton_acceder = new JButton("REGISTRAR"); 
-	boton_acceder.setBounds(260, 225, 100, 30);
-	add(boton_acceder); 
+	boton_crear = new JButton("REGISTRAR"); 
+	boton_crear.setBounds(260, 225, 100, 30);
+	add(boton_crear); 
 	
-		
-		
-		
-		
-		
-		
-		
 	}//Contrusctor PantallaLogin
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
