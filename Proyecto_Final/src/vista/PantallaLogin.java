@@ -43,6 +43,7 @@ public class PantallaLogin extends JFrame {
 	JLabel label_usuario, label_contraseña;
 	JTextField caja_usuario, caja_contraseña; 
 	JButton boton_acceder, boton_crear, boton_Restablecer; 
+	JPasswordField passwordl = new JPasswordField(); 
 
 	
 	public PantallaLogin() {
@@ -72,7 +73,7 @@ public class PantallaLogin extends JFrame {
 	add(label_contraseña);
 	caja_contraseña = new JTextField(); 
 	caja_contraseña.setBounds(175, 185, 150, 20);
-	add(caja_contraseña); 
+	add(caja_contraseña);
 	
 	//BOTON ACCEDER
 	boton_acceder = new JButton("ACCEDER"); 
@@ -124,7 +125,10 @@ public class PantallaLogin extends JFrame {
 			}
 		}
 	});//BotonRestablecer
+	
+	
 	}//Contrusctor PantallaLogin
+	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
