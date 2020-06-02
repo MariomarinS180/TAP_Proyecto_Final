@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
@@ -212,8 +213,9 @@ public class VentanasABCC extends JFrame{
 		cajaNumero.setBounds(500, 330, 100, 30);
 		IF_Altas.add(cajaNumero); 
 		
-		botonRegistrar = new JButton(); 
-		botonRegistrar.setBounds(190, 430, 100, 30);
+		botonRegistrar = new JButton("REGISTRAR"); 
+		botonRegistrar.setBounds(190, 430, 140, 30);
+		botonRegistrar.setIcon(new ImageIcon("imagenes/verificacion.png"));
 		IF_Altas.add(botonRegistrar); 
 		
 		botonRestablecer = new JButton(); 
