@@ -79,6 +79,7 @@ public class PantallaLogin extends JFrame {
 	boton_acceder = new JButton("ACCEDER"); 
 	boton_acceder.setBounds(140, 230, 100, 30);
 	add(boton_acceder); 
+	boton_acceder.setIcon(new ImageIcon("imagenes/sasa.png"));
 	boton_acceder.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			//VALIDACION CAJA VACIA	
