@@ -2,6 +2,7 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -34,7 +35,7 @@ public class VentanasABCC extends JFrame{
 	JTextField cajaNombre_Paciente, cajaApPaterno_Paciente, cajaApMaterno_Paciente, cajaCalle, 
 	cajaTelefono_Paciente, cajaRiesgo, cajaColonia, cajaNumero; 
 	JLabel txtNombre, txtApPaterno, txtApMaterno, txtDomicilio, txtTelefono, txtMotivoConsulta, txtEdad, txtSexo,
-	txtCalle, txtColonia, txtNumero, txtGravedad; 
+	txtCalle, txtColonia, txtNumero, txtGravedad ;  
 	JButton botonRegistrar, botonRestablecer; 
 	
 	public VentanasABCC() {
@@ -131,6 +132,12 @@ public class VentanasABCC extends JFrame{
 		IF_Altas.setResizable(true);
 		IF_Altas.setLayout(null);
 		IF_Altas.setBackground(Color.LIGHT_GRAY);
+		
+		
+		JLabel label_txt = new JLabel();
+		label_txt.setIcon(new ImageIcon("imagenes/fondoAltas.png"));
+		label_txt.setBounds(0, 0, 695, 60);
+		IF_Altas.add(label_txt);
 		
 		txtNombre = new JLabel("Nombre del Paciente");
 		txtNombre.setBounds(8, 80, 200, 30);
