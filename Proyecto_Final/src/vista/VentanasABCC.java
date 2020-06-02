@@ -38,14 +38,14 @@ public class VentanasABCC extends JFrame{
 		setSize(710, 600);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		/*try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(new File("imagenes/fondoPrueba.jpg")));
+		try {
+            FondoSwing fondo = new FondoSwing(ImageIO.read(new File("imagenes/fondoBD.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        */
+        
 		
 		menuBar = new JMenuBar(); 
 		menuBar = new JMenuBar();
@@ -111,6 +111,7 @@ public class VentanasABCC extends JFrame{
 		menuBar.add(menuTablas);
 		menuBar.add(menuABCC);
 		setJMenuBar(menuBar);
+		
 		JDesktopPane desktopPane = new JDesktopPane();
 		
 		IF_Altas = new JInternalFrame();
@@ -126,6 +127,9 @@ public class VentanasABCC extends JFrame{
 		
 		desktopPane.add(IF_Altas); 
 		add(desktopPane, BorderLayout.CENTER);
+		
+		
+		
 		
 		
 	}//Constructor
