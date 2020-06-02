@@ -228,6 +228,28 @@ public class VentanasABCC extends JFrame{
 		botonRegistrar.setBackground(Color.green);
 		botonRegistrar.setIcon(new ImageIcon("imagenes/verificacion.png"));
 		IF_Altas.add(botonRegistrar); 
+		botonRegistrar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(cajaNombre_Paciente.getText().equals("") || cajaApPaterno_Paciente.getText().equals("")|| cajaApMaterno_Paciente.getText().equals("")
+						|| cajaTelefono_Paciente.getText().equals("") || comboBoxEdad.getSelectedIndex() == 0 || comboBoxSexo.getSelectedIndex()==0 || comboBoxGravedad.getSelectedIndex()==0
+						|| cajaCalle.getText().equals("")||cajaColonia.getText().equals("")|| cajaNumero.getText().equals("")) {
+					JOptionPane.showMessageDialog(getParent(), "DEBE LLENAR TODOS LOS CAMPOS", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					try {
+						boolean res = new PacienteDAO().agregarPaciente(new Paciente(123, cajaNombre_Paciente.getText(), cajaApPaterno_Paciente.getText(), cajaApMaterno_Paciente.getText(), 
+								cajaTelefono_Paciente.getText(), String.valueOf(comboBoxGravedad.getSelectedItem()), 
+								cajaCalle.getText(), cajaColonia.getText(), cajaNumero.getText(), 
+								String.valueOf(comboBoxSexo.getSelectedItem()), comboBoxEdad.getSelectedIndex()));
+								JOptionPane.showMessageDialog(getParent(), "SE REGISTRÓ CORRECTAMENTE", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(getParent(), "LLENE LOS DATOS", "AVISO", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				}
+				
+			}
+		});
 		
 		
 		

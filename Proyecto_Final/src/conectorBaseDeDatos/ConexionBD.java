@@ -23,10 +23,10 @@ public class ConexionBD {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
 									   //127.0.0.1	
-			String URL = "jdbc:mysql://localhost:3306/BD_Proyecto"; 
+			String URL = "jdbc:mysql://localhost:3306/BD_Pacientes"; 
 			
 			//en caso que les indique un error de zona horaria
-			String url = "jdbc:mysql://localhost:3306/BD_Proyecto?useTimezone=true&serverTimezone=UTC";
+			String url = "jdbc:mysql://localhost:3306/BD_Pacientes?useTimezone=true&serverTimezone=UTC";
 			
 			conexion = DriverManager.getConnection(url, "root", "03082000");
 			
