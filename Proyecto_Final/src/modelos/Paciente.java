@@ -4,24 +4,29 @@ public class Paciente {
 	private String nombre_Paciente; 
 	private String apPaterno_Paciente; 
 	private String apMaterno_Paciente; 
-	private String domicilo_Paciente; 
-	private String telefono_Paciente; 
-	private String motivo_Consulta; 
-	private byte sexo; 
-	private byte edad; 
+	private String telefono_Paciente;
+	private int gravedad_Paciente; 
+	private String calle;
+	private String colonia; 
+	private int numero;
+	private int sexo; 
+	private int edad; 
 	public Paciente() {}
 	public Paciente(String iD_Paciente, String nombre_Paciente, String apPaterno_Paciente, String apMaterno_Paciente,
-			String domicilo_Paciente, String telefono_Paciente, String motivo_Consulta, byte sexo, byte edad) {
+			String telefono_Paciente, int gravedad_Paciente, String calle, String colonia, int numero, int sexo,
+			int edad) {
 		ID_Paciente = iD_Paciente;
 		this.nombre_Paciente = nombre_Paciente;
 		this.apPaterno_Paciente = apPaterno_Paciente;
 		this.apMaterno_Paciente = apMaterno_Paciente;
-		this.domicilo_Paciente = domicilo_Paciente;
 		this.telefono_Paciente = telefono_Paciente;
-		this.motivo_Consulta = motivo_Consulta;
+		this.gravedad_Paciente = gravedad_Paciente;
+		this.calle = calle;
+		this.colonia = colonia;
+		this.numero = numero;
 		this.sexo = sexo;
 		this.edad = edad;
-	}
+	}//Constructor
 	public String getID_Paciente() {
 		return ID_Paciente;
 	}
@@ -46,41 +51,46 @@ public class Paciente {
 	public void setApMaterno_Paciente(String apMaterno_Paciente) {
 		this.apMaterno_Paciente = apMaterno_Paciente;
 	}
-	public String getDomicilo_Paciente() {
-		return domicilo_Paciente;
-	}
-	public void setDomicilo_Paciente(String domicilo_Paciente) {
-		this.domicilo_Paciente = domicilo_Paciente;
-	}
 	public String getTelefono_Paciente() {
 		return telefono_Paciente;
 	}
 	public void setTelefono_Paciente(String telefono_Paciente) {
 		this.telefono_Paciente = telefono_Paciente;
 	}
-	public String getMotivo_Consulta() {
-		return motivo_Consulta;
+	public int getGravedad_Paciente() {
+		return gravedad_Paciente;
 	}
-	public void setMotivo_Consulta(String motivo_Consulta) {
-		this.motivo_Consulta = motivo_Consulta;
+	public void setGravedad_Paciente(int gravedad_Paciente) {
+		this.gravedad_Paciente = gravedad_Paciente;
 	}
-	public byte getSexo() {
+	public String getCalle() {
+		return calle;
+	}
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+	public String getColonia() {
+		return colonia;
+	}
+	public void setColonia(String colonia) {
+		this.colonia = colonia;
+	}
+	public int getNumero() {
+		return numero;
+	}
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+	public int getSexo() {
 		return sexo;
 	}
-	public void setSexo(byte sexo) {
+	public void setSexo(int sexo) {
 		this.sexo = sexo;
 	}
-	public byte getEdad() {
+	public int getEdad() {
 		return edad;
 	}
-	public void setEdad(byte edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
-	}
-	@Override
-	public String toString() {
-		return "Paciente [ID_Paciente=" + ID_Paciente + ", nombre_Paciente=" + nombre_Paciente + ", apPaterno_Paciente="
-				+ apPaterno_Paciente + ", apMaterno_Paciente=" + apMaterno_Paciente + ", domicilo_Paciente="
-				+ domicilo_Paciente + ", telefono_Paciente=" + telefono_Paciente + ", motivo_Consulta="
-				+ motivo_Consulta + ", sexo=" + sexo + ", edad=" + edad + "]";
 	}
 }//class
