@@ -1,20 +1,20 @@
 package modelos;
 public class Paciente {
-	private String ID_Paciente; 
+	private int ID_Paciente; 
 	private String nombre_Paciente; 
 	private String apPaterno_Paciente; 
 	private String apMaterno_Paciente; 
 	private String telefono_Paciente;
-	private int gravedad_Paciente; 
+	private String gravedad_Paciente; 
 	private String calle;
 	private String colonia; 
-	private int numero;
-	private int sexo; 
+	private String numero;
+	private String sexo; 
 	private int edad; 
 	public Paciente() {}
-	public Paciente(String iD_Paciente, String nombre_Paciente, String apPaterno_Paciente, String apMaterno_Paciente,
-			String telefono_Paciente, int gravedad_Paciente, String calle, String colonia, int numero, int sexo,
-			int edad) {
+	public Paciente(int iD_Paciente, String nombre_Paciente, String apPaterno_Paciente, String apMaterno_Paciente,
+			String telefono_Paciente, String gravedad_Paciente, String calle, String colonia, String numero,
+			String sexo, int edad) {
 		ID_Paciente = iD_Paciente;
 		this.nombre_Paciente = nombre_Paciente;
 		this.apPaterno_Paciente = apPaterno_Paciente;
@@ -26,11 +26,11 @@ public class Paciente {
 		this.numero = numero;
 		this.sexo = sexo;
 		this.edad = edad;
-	}//Constructor
-	public String getID_Paciente() {
+	}
+	public int getID_Paciente() {
 		return ID_Paciente;
 	}
-	public void setID_Paciente(String iD_Paciente) {
+	public void setID_Paciente(int iD_Paciente) {
 		ID_Paciente = iD_Paciente;
 	}
 	public String getNombre_Paciente() {
@@ -57,10 +57,10 @@ public class Paciente {
 	public void setTelefono_Paciente(String telefono_Paciente) {
 		this.telefono_Paciente = telefono_Paciente;
 	}
-	public int getGravedad_Paciente() {
+	public String getGravedad_Paciente() {
 		return gravedad_Paciente;
 	}
-	public void setGravedad_Paciente(int gravedad_Paciente) {
+	public void setGravedad_Paciente(String gravedad_Paciente) {
 		this.gravedad_Paciente = gravedad_Paciente;
 	}
 	public String getCalle() {
@@ -75,16 +75,16 @@ public class Paciente {
 	public void setColonia(String colonia) {
 		this.colonia = colonia;
 	}
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	public int getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
-	public void setSexo(int sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 	public int getEdad() {

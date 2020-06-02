@@ -25,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import controlador.PacienteDAO;
+import modelos.Paciente;
 
 public class VentanasABCC extends JFrame{
 	JMenuBar menuBar;
@@ -226,6 +228,8 @@ public class VentanasABCC extends JFrame{
 		botonRegistrar.setBackground(Color.green);
 		botonRegistrar.setIcon(new ImageIcon("imagenes/verificacion.png"));
 		IF_Altas.add(botonRegistrar); 
+		
+		
 		
 		botonRestablecer = new JButton("REESTABLECER"); 
 		botonRestablecer.setBounds(400, 430, 160, 30);
