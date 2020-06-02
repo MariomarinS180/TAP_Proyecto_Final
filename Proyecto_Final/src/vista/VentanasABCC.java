@@ -214,12 +214,17 @@ public class VentanasABCC extends JFrame{
 		IF_Altas.add(cajaNumero); 
 		
 		botonRegistrar = new JButton("REGISTRAR"); 
-		botonRegistrar.setBounds(190, 430, 140, 30);
+		botonRegistrar.setBounds(130, 430, 140, 30);
+		botonRegistrar.setForeground(Color.black);
+		botonRegistrar.setBackground(Color.green);
 		botonRegistrar.setIcon(new ImageIcon("imagenes/verificacion.png"));
 		IF_Altas.add(botonRegistrar); 
 		
-		botonRestablecer = new JButton(); 
-		botonRestablecer.setBounds(400, 430, 100, 30);
+		botonRestablecer = new JButton("REESTABLECER"); 
+		botonRestablecer.setBounds(400, 430, 160, 30);
+		botonRestablecer.setForeground(Color.black);
+		botonRestablecer.setBackground(Color.red);
+		botonRestablecer.setIcon(new ImageIcon("imagenes/restablecer.png"));
 		IF_Altas.add(botonRestablecer); 
 		
 		desktopPane.add(IF_Altas); 
