@@ -5,36 +5,59 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-public class VentanasABCC extends JFrame {
+public class VentanasABCC extends JFrame{
 	JMenuBar menuBar;
-	JMenu menuInicio;
-	JMenuItem menuAltas, menuBajas, menuCambios, menuConsultas, menuSalir;
+	JMenu menuABCC, menuTablas;
+	JMenuItem menuAltas, menuBajas, menuCambios, menuConsultas, menuSalir, menuPacientes, menuDoctores;
 	JInternalFrame IF_Altas, IF_Bajas, IF_Cambios ,IF_Consultas, IF_Salir;
+	JTextField cajaNombre_Paciente, cajaApPaterno_Paciente, cajaApMaterno_Paciente, cajaDomicilio_Paciente,
+	cajaTelefono_Paciente, cajaMotivoConsulta; 
+	JLabel txtNombre, txtApPaterno, txtApMaterno, txtDomicilio, txtTelefono, txtMotivoConsulta, txtEdad, txtSexo; 
+	
 	public VentanasABCC() {
 		getContentPane().setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("ABCC");
-		setSize(600, 500);
+		setTitle("INICIO");
+		setSize(710, 600);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		getContentPane().setBackground(Color.WHITE);
+		/*try {
+            FondoSwing fondo = new FondoSwing(ImageIO.read(new File("imagenes/fondoPrueba.jpg")));
+            JPanel panel = (JPanel) this.getContentPane();
+            panel.setBorder(fondo);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        */
 		
 		menuBar = new JMenuBar(); 
-		menuInicio = new JMenu("ACCESOS");
+		menuBar = new JMenuBar();
+		menuTablas = new JMenu("TABLAS");
+		menuDoctores = new JMenuItem("DOCTORES");
+		menuPacientes = new JMenuItem("PACIENTES");
+		menuABCC = new JMenu("ACCESOS");
 		menuAltas = new JMenuItem("ALTAS");
 		menuBajas = new JMenuItem("BAJAS"); 
 		menuCambios = new JMenuItem("CAMBIOS");
 		menuConsultas = new JMenuItem("CONSULTAS");
-		menuSalir = new JMenuItem("CERRAR SESIÓN");
+		//menuSalir = new JMenuItem("CERRAR SESIÓN");
 		menuAltas.setAccelerator(
 				KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 					menuAltas.addActionListener(new ActionListener() {
@@ -70,21 +93,39 @@ public class VentanasABCC extends JFrame {
 						}
 					});	
 					
-		menuSalir.setAccelerator(null);
+		/*menuSalir.setAccelerator(null);
 					menuSalir.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							IF_Salir.setVisible(true);
 						}
 					});	
-					
-		menuInicio.add(menuAltas);
-		menuInicio.add(menuBajas);
-		menuInicio.add(menuCambios);
-		menuInicio.add(menuConsultas);
-		menuInicio.add(menuSalir); 
-		menuBar.add(menuInicio);
+		*/			
+		menuABCC.add(menuAltas);
+		menuABCC.add(menuBajas);
+		menuABCC.add(menuCambios);
+		menuABCC.add(menuConsultas);
+		//menuInicio.add(menuSalir); 
+		menuTablas.add(menuDoctores);
+		menuTablas.add(menuPacientes);
+		menuBar.add(menuTablas);
+		menuBar.add(menuABCC);
 		setJMenuBar(menuBar);
+		JDesktopPane desktopPane = new JDesktopPane();
+		
+		IF_Altas = new JInternalFrame();
+		IF_Altas.getContentPane().setLayout(null);
+		IF_Altas.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		IF_Altas.setTitle("ALTAS");
+		IF_Altas.setSize(695, 537);
+		IF_Altas.setMaximizable(true);
+		IF_Altas.setIconifiable(true);
+		IF_Altas.setClosable(true);
+		IF_Altas.setResizable(true);
+		IF_Altas.setLayout(null);
+		
+		desktopPane.add(IF_Altas); 
+		add(desktopPane, BorderLayout.CENTER);
 		
 		
 	}//Constructor
