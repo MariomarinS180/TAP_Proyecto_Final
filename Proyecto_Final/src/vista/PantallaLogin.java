@@ -19,6 +19,8 @@ import java.sql.ResultSet;
 import javax.swing.border.Border;
 
 import conectorBaseDeDatos.ConexionBD;
+import controlador.InicioDeSesion;
+import controlador.PacienteDAO;
 /**
  * @author DiscoDurodeRoer
  */
@@ -120,12 +122,6 @@ public class PantallaLogin extends JFrame {
 			}
 		}
 	});
-	
-			
-			
-			
-			
-	
 	boton_crear = new JButton("REGISTRAR"); 
 	boton_crear.setBounds(260, 230, 100, 30);
 	add(boton_crear); 
@@ -135,7 +131,12 @@ public class PantallaLogin extends JFrame {
 			if (caja_usuario.getText().equals("") || caja_contraseña.getText().equals("")) {
 			JOptionPane.showMessageDialog(getParent(), "DEBE LLENAR LOS DATOS", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
 			}else {
-				
+				try {
+					boolean res = new PacienteDAO().agregarUsuario(new InicioDeSesion(caja_usuario.getText(), caja_contraseña.getText()));
+					JOptionPane.showMessageDialog(getParent(), "¡SE REGISTRÓ CORRECTAMENTE!", "¡EXITO!", JOptionPane.PLAIN_MESSAGE);
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(getParent(), "DEBE LLENAR LOS DATOS", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 			
 		}
