@@ -123,6 +123,7 @@ public class VentanasABCC extends JFrame{
 		
 		JDesktopPane desktopPane = new JDesktopPane();
 		
+		//-------------------------- INICIO INTERNALFRAME ALTAS -------------------------
 		IF_Altas = new JInternalFrame();
 		IF_Altas.getContentPane().setLayout(null);
 		IF_Altas.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -250,15 +251,16 @@ public class VentanasABCC extends JFrame{
 				
 			}
 		});
-		
-		
-		
 		botonRestablecer = new JButton("REESTABLECER"); 
 		botonRestablecer.setBounds(400, 430, 160, 30);
 		botonRestablecer.setForeground(Color.black);
 		botonRestablecer.setBackground(Color.red);
 		botonRestablecer.setIcon(new ImageIcon("imagenes/restablecer.png"));
 		IF_Altas.add(botonRestablecer); 
+		
+		//-------------------------- FIN INTERNALFRAME ALTAS -------------------------
+		
+		//-------------------------- INICIO INTERNALFRAME BAJAS -------------------------
 		
 		desktopPane.add(IF_Altas); 
 		add(desktopPane, BorderLayout.CENTER);
