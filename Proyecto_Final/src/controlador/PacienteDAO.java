@@ -1,6 +1,13 @@
 package controlador;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 import conectorBaseDeDatos.ConexionBD;
 import modelos.Paciente;
 
@@ -19,8 +26,28 @@ public class PacienteDAO {
 	}
 	
 	
-	
-	
-	
-	
-}//class
+	public void buscarUsuariosConTableModel(DefaultTableModel model) {
+
+		ConexionBD conex = new ConexionBD();
+		try {
+			Statement estatuto = conex.getConnection().createStatement();
+			ResultSet rs = estatuto.executeQuery("SELECT * FROM Pacientes ");
+
+			while (rs.next()) {
+				// es para obtener los datos y almacenar las filas
+				Object[] fila = new Object[10];
+				// para llenar cada columna con lo datos almacenados
+				for (int i = 0; i <10 ; i++)
+					fila[i] = rs.getObject(i + 1);
+				// es para cargar los datos en filas a la tabla modelo
+				model.addRow(fila);
+			}
+		
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+}//Class Paciente DAO
