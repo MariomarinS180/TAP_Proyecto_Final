@@ -12,8 +12,13 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.border.Border;
+
+import conectorBaseDeDatos.ConexionBD;
 /**
  * @author DiscoDurodeRoer
  */
@@ -38,12 +43,15 @@ class FondoSwing implements Border {
     }
 }
 public class PantallaLogin extends JFrame {
+	private ResultSet rs; 
+	private PreparedStatement pst; 
+	private Connection con; 
 	ImageIcon imagen;
 	Icon icono;
 	JLabel label_usuario, label_contraseña;
 	JTextField caja_usuario, caja_contraseña; 
 	JButton boton_acceder, boton_crear, boton_Restablecer; 
-	JPasswordField passwordl = new JPasswordField(); 
+	 
 
 	
 	public PantallaLogin() {
@@ -80,15 +88,10 @@ public class PantallaLogin extends JFrame {
 	boton_acceder.setBounds(140, 230, 100, 30);
 	add(boton_acceder); 
 	boton_acceder.setIcon(new ImageIcon("imagenes/Acceder.png"));
-	boton_acceder.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			//VALIDACION CAJA VACIA	
-			if (caja_usuario.getText().equals("") || caja_contraseña.getText().equals("")) {
-			JOptionPane.showMessageDialog(getParent(), "DEBE LLENAR LOS DATOS", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
 			
-			}
-		}
-	});
+			
+			
+			
 	
 	boton_crear = new JButton("REGISTRAR"); 
 	boton_crear.setBounds(260, 230, 100, 30);

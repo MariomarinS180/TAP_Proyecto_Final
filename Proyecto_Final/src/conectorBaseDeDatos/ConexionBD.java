@@ -1,13 +1,11 @@
 package conectorBaseDeDatos;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import javax.swing.table.AbstractTableModel;
 
 public class ConexionBD {
 	private Connection conexion;
@@ -16,17 +14,12 @@ public class ConexionBD {
 	private PreparedStatement ps; //evita SQL INJECTION
 	
 	private ResultSet rs;
-	
-	public ConexionBD() {
-		//verifica que exista el conector de BD entre Java y MySQL
+	public ConexionBD(){
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-									   //127.0.0.1	
-			String URL = "jdbc:mysql://localhost:3306/BD_Pacientes"; 
-			
 			//en caso que les indique un error de zona horaria
-			String url = "jdbc:mysql://localhost:3306/BD_Pacientes?useTimezone=true&serverTimezone=UTC";
+			String url = "jdbc:mysql://localhost:3306/bd_pacientes?useTimezone=true&serverTimezone=UTC";
 			
 			conexion = DriverManager.getConnection(url, "root", "03082000");
 			
@@ -80,12 +73,7 @@ public class ConexionBD {
 			}
 		}
 	
-
-	
-	
-	
 	public static void main(String[] args) {
-		new ConexionBD();
-
-	}//main
-}//class
+		new ConexionBD();		
+	}
+}
