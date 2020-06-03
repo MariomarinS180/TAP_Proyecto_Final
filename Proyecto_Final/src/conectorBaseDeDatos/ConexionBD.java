@@ -6,72 +6,89 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 public class ConexionBD {
-	private Connection conexion;
-	private Statement stm; //problema: permite SQL INJECTION
 	
-	private PreparedStatement ps; //evita SQL INJECTION
+	private String r;
+
+	static Connection conexion;
+	//private Statement stm;// PROBLEMA: permite SQL INJECTION
+	
+	private PreparedStatement ps;
 	
 	private ResultSet rs;
-	public ConexionBD(){
+	//Singlenton
+	public static Connection getConnection () {
+		//verifica que exista el conector de BD entre java y MySql
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			//en caso que les indique un error de zona horaria
 			String url = "jdbc:mysql://localhost:3306/bd_pacientes?useTimezone=true&serverTimezone=UTC";
+			conexion = DriverManager.getConnection(url,"root","03082000");
 			
-			conexion = DriverManager.getConnection(url, "root", "03082000");
-			
-			System.out.println("¡Conexion establecida!");
-			//System.out.println("Ya casi soy ISC  =)  ");
+			/*System.out.println("Conexion establecida!!!");
+			System.out.println("Ya casi soy ISC =) ");*/
 			
 			
-		}catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			System.out.println("Error del DRIVER");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en conexion a MySQL");
+			System.out.println("Error en conexion  a MySQL");
 			e.printStackTrace();
-		} 
-		
-	}
-	//Metodo para ejecutar instrucciones DDL y DML (Altas, Bajas y Cambios, entre otras)
-		public boolean ejecutarInstruccion(String sql) {
-			try {
-			 stm = conexion.createStatement();
-				int res = stm.executeUpdate(sql);
-				System.out.println("CONEXION BD: " + res);
-				return res==1 ? true : false;
-			} catch (SQLException e) {
-				System.out.println("Error en la INSTRUCCION SQL +\n" + sql );
-				e.printStackTrace();
-				return false;
-			}
-			
-		}//ejecutar INSTRUCCION
-		
-		//Metodo para CONSULTAS (instrucciones SQL, por ejemplo SELECT * FROM ....)
-		public ResultSet ejecutarConsultaRegistros(String sql) {
-			ResultSet rs = null; 
-			try {
-				stm = conexion.createStatement();
-				return stm.executeQuery(sql);
-			} catch (SQLException e) {
-				System.out.println("Error en la INSTRUCCION SQL +\n" + sql );
-				e.printStackTrace();
-				return rs; 
-			} 	
 		}
-		public void cerrarConexion() {
-			try {
-				stm.close();
-				conexion.close();
+		return conexion;
+				
+	}
+
+	
+	//metodo para ejecutar instrucciones DOL y DML (Altas, Bajas y Cambios, entre iotras)
+	public boolean ejecutarInstruccion(String sql) {
+		
+		try {
+			
+			ps = conexion.prepareStatement(sql);
+			
+			//stm = con.createStatement();
+			
+			int r = ps.executeUpdate(sql);
+				return r == 1 ? true : false ;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			
+			return false;
+		
+	}
+	
+	//metodos para Consultas(Instrucciones SQL, por ejemplo Selecte* from)
+	public ResultSet ejecutarConsultaDeRegistros(String sql){
+		ResultSet rs= null;
+		try {
+			ps = conexion.prepareStatement(sql);
+		//stm = con.createStatement();
+		
+		return ps.executeQuery(sql);
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return rs;
 		}
+		
+	}
+	
+	public void cerrarConexion() {
+		try {
+			ps.close();
+			conexion.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public static void main(String[] args) {
 		new ConexionBD();		

@@ -88,6 +88,39 @@ public class PantallaLogin extends JFrame {
 	boton_acceder.setBounds(140, 230, 100, 30);
 	add(boton_acceder); 
 	boton_acceder.setIcon(new ImageIcon("imagenes/Acceder.png"));
+	boton_acceder.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String user = caja_usuario.getText(); 
+			String pass = caja_usuario.getText();
+			if(user.equals("")||pass.equals("")) {
+				JOptionPane.showMessageDialog(getParent(), "DEBE INGRESAR LOS DATOS", "INICIO SESIÓN", JOptionPane.CLOSED_OPTION);
+		//	}else if (pass.equals("")){
+		//		JOptionPane.showMessageDialog(getParent(), "DEBE INGRESAR SU CONTRASEÑA", "INICIO SESIÓN", JOptionPane.CLOSED_OPTION);
+		//	}else if(user.equals("")) {
+		//		JOptionPane.showMessageDialog(getParent(), "DEBE INGRESAR SU NOMBRE USUARIO", "INICIO SESIÓN", JOptionPane.CLOSED_OPTION);
+			}else {
+				try {
+					 con= ConexionBD.getConnection();
+					 pst = con.prepareStatement("SELECT * FROM usuario WHERE user=? and pass=?");
+					 pst.setString(1, user);
+					 pst.setString(2, pass);
+					 rs = pst.executeQuery();
+			
+					if(rs.next()) {
+						VentanasABCC gui = new VentanasABCC(); 
+						gui.setVisible(true);
+						setVisible(false);
+					}else {
+						JOptionPane.showMessageDialog(getParent(), "DEBE REGISTRARSE", "FALLO AL INICIAR SESIÓN", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (Exception e2) {
+					
+				}
+			}
+		}
+	});
+	
 			
 			
 			
@@ -101,6 +134,7 @@ public class PantallaLogin extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if (caja_usuario.getText().equals("") || caja_contraseña.getText().equals("")) {
 			JOptionPane.showMessageDialog(getParent(), "DEBE LLENAR LOS DATOS", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+			}else {
 				
 			}
 			
