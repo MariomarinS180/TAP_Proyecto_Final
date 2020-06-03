@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -29,16 +30,17 @@ import controlador.PacienteDAO;
 import modelos.Paciente;
 
 public class VentanasABCC extends JFrame{
+	
 	JMenuBar menuBar;
 	JMenu menuABCC, menuTablas;
 	JMenuItem menuAltas, menuBajas, menuCambios, menuConsultas, menuSalir, menuPacientes, menuDoctores;
 	JInternalFrame IF_Altas, IF_Bajas, IF_Cambios ,IF_Consultas, IF_Salir;
 	JComboBox<String> comboBoxEdad, comboBoxSexo, comboBoxGravedad; 
 	JTextField cajaNombre_Paciente, cajaApPaterno_Paciente, cajaApMaterno_Paciente, cajaCalle, 
-	cajaTelefono_Paciente, cajaRiesgo, cajaColonia, cajaNumero; 
+	cajaTelefono_Paciente, cajaColonia, cajaNumero, cajaID; 
 	JLabel txtNombre, txtApPaterno, txtApMaterno, txtDomicilio, txtTelefono, txtMotivoConsulta, txtEdad, txtSexo,
-	txtCalle, txtColonia, txtNumero, txtGravedad ;  
-	JButton botonRegistrar, botonRestablecer; 
+	txtCalle, txtColonia, txtNumero, txtGravedad, txtID;  
+	JButton botonRegistrar, botonRestablecer, botonEliminar; 
 	
 	public VentanasABCC() {
 		getContentPane().setLayout(new BorderLayout());
@@ -223,30 +225,38 @@ public class VentanasABCC extends JFrame{
 		cajaNumero.setBounds(500, 330, 100, 30);
 		IF_Altas.add(cajaNumero); 
 		
+		txtID = new JLabel("Crée un ID para el Paciente");
+		txtID.setBounds(125, 375, 170, 30);
+		IF_Altas.add(txtID); 
+		cajaID = new JTextField(); 
+		cajaID.setBounds(285, 373, 100, 30);
+		IF_Altas.add(cajaID); 
+		
+		
+		
 		botonRegistrar = new JButton("REGISTRAR"); 
 		botonRegistrar.setBounds(130, 430, 140, 30);
 		botonRegistrar.setForeground(Color.black);
 		botonRegistrar.setBackground(Color.green);
 		botonRegistrar.setIcon(new ImageIcon("imagenes/verificacion.png"));
-		IF_Altas.add(botonRegistrar); 
+		IF_Altas.add(botonRegistrar);
 		botonRegistrar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if(cajaNombre_Paciente.getText().equals("") || cajaApPaterno_Paciente.getText().equals("")|| cajaApMaterno_Paciente.getText().equals("")
+			public void actionPerformed(ActionEvent e) {
+				if(cajaID.getText().equals("")||cajaNombre_Paciente.getText().equals("") || cajaApPaterno_Paciente.getText().equals("")|| cajaApMaterno_Paciente.getText().equals("")
 						|| cajaTelefono_Paciente.getText().equals("") || comboBoxEdad.getSelectedIndex() == 0 || comboBoxSexo.getSelectedIndex()==0 || comboBoxGravedad.getSelectedIndex()==0
 						|| cajaCalle.getText().equals("")||cajaColonia.getText().equals("")|| cajaNumero.getText().equals("")) {
-					JOptionPane.showMessageDialog(getParent(), "DEBE LLENAR TODOS LOS CAMPOS", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(getParent(), "LLENE TODOS LOS CAMPOS", "¡PSST!", JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					try {
-						boolean res = new PacienteDAO().agregarPaciente(new Paciente(123, cajaNombre_Paciente.getText(), cajaApPaterno_Paciente.getText(), cajaApMaterno_Paciente.getText(), 
-								cajaTelefono_Paciente.getText(), String.valueOf(comboBoxGravedad.getSelectedItem()), 
-								cajaCalle.getText(), cajaColonia.getText(), cajaNumero.getText(), 
+						boolean res = new PacienteDAO().agregarPaciente(new Paciente(Integer.parseInt(cajaID.getText()), cajaNombre_Paciente.getText(), cajaApPaterno_Paciente.getText(), 
+								cajaApMaterno_Paciente.getText(), cajaNumero.getText(), 
+								String.valueOf(comboBoxGravedad.getSelectedItem()), cajaCalle.getText(), 
+								cajaColonia.getText(), cajaNumero.getText(), 
 								String.valueOf(comboBoxSexo.getSelectedItem()), comboBoxEdad.getSelectedIndex()));
-								JOptionPane.showMessageDialog(getParent(), "SE REGISTRÓ CORRECTAMENTE", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
-					} catch (Exception e) {
+						JOptionPane.showMessageDialog(getParent(), "SE REGISTRÓ CORRECTAMENTE", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+					} catch (Exception e2) {
 						JOptionPane.showMessageDialog(getParent(), "LLENE LOS DATOS", "AVISO", JOptionPane.ERROR_MESSAGE);
 					}
-					
 				}
 				
 			}
@@ -257,6 +267,29 @@ public class VentanasABCC extends JFrame{
 		botonRestablecer.setBackground(Color.red);
 		botonRestablecer.setIcon(new ImageIcon("imagenes/restablecer.png"));
 		IF_Altas.add(botonRestablecer); 
+		botonRestablecer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(cajaNombre_Paciente.getText().equals("") && cajaApPaterno_Paciente.getText().equals("")&& cajaApMaterno_Paciente.getText().equals("")
+						&& cajaTelefono_Paciente.getText().equals("") && comboBoxEdad.getSelectedIndex() == 0 && comboBoxSexo.getSelectedIndex()==0 && comboBoxGravedad.getSelectedIndex()==0
+						&& cajaCalle.getText().equals("")&&cajaColonia.getText().equals("")&& cajaNumero.getText().equals("") && cajaID.getText().equals("")) {
+					JOptionPane.showMessageDialog(getParent(), "NO HAY NADA QUE REESTABLECER", "¡PSST!", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+				cajaNombre_Paciente.setText(""); 
+				cajaApPaterno_Paciente.setText("");
+				cajaApMaterno_Paciente.setText(""); 
+				cajaCalle.setText(""); 
+				cajaTelefono_Paciente.setText(""); 
+				cajaColonia.setText(""); 
+				cajaNumero.setText(""); 
+				cajaID.setText("");
+				comboBoxEdad.setSelectedIndex(0);
+				comboBoxGravedad.setSelectedIndex(0);
+				comboBoxSexo.setSelectedIndex(0);
+				}
+				
+			}
+		});
 		
 		//-------------------------- FIN INTERNALFRAME ALTAS -------------------------
 		
@@ -268,8 +301,7 @@ public class VentanasABCC extends JFrame{
 		
 		
 		
-		
-		
+	
 	}//Constructor
 
 	public static void main(String[] args) {
