@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -30,6 +33,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+import conectorBaseDeDatos.ConexionBD;
 import controlador.PacienteDAO;
 import modelos.Paciente;
 
@@ -337,6 +341,14 @@ public class VentanasABCC extends JFrame{
 		
 		//-------------------------- INICIO INTERNALFRAME BAJAS -------------------------
 		
+		
+		JLabel txtNombre2, txtApPaterno2, txtApMaterno2, txtDomicilio2, txtTelefono2, txtMotivoConsulta2, txtEdad2, txtSexo2,
+		txtCalle2, txtColonia2, txtNumero2, txtGravedad2, txtID2;  
+		JButton botonRegistrar2, botonRestablecer2, botonEliminar2; 
+		JTextField cajaNombre_Paciente2, cajaApPaterno_Paciente2, cajaApMaterno_Paciente2, cajaCalle2, 
+		cajaTelefono_Paciente2, cajaColonia2, cajaNumero2, cajaID2; 
+		JComboBox<String> comboBoxEdad2, comboBoxSexo2, comboBoxGravedad2; 
+		
 		IF_Bajas = new JInternalFrame();
 		IF_Bajas.getContentPane().setLayout(null);
 		IF_Bajas.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -352,103 +364,121 @@ public class VentanasABCC extends JFrame{
 		
 		JLabel label_txt3 = new JLabel();
 		label_txt3.setIcon(new ImageIcon("imagenes/fondoBajas.png"));
-		label_txt3.setBounds(0, 0, 695, 60);
+		label_txt3.setBounds(0, 10, 695, 60);
 		IF_Bajas.add(label_txt3);
 		
-		txtNombre = new JLabel("Nombre del Paciente");
-		txtNombre.setBounds(8, 80, 200, 30);
-		IF_Bajas.add(txtNombre);
-		cajaNombre_Paciente = new JTextField();
-		cajaNombre_Paciente.setBounds(145, 80, 125, 30);
-		IF_Bajas.add(cajaNombre_Paciente);
+		txtNombre2 = new JLabel("Nombre del Paciente");
+		txtNombre2.setBounds(8, 90, 200, 30);
+		IF_Bajas.add(txtNombre2);
+		cajaNombre_Paciente2 = new JTextField();
+		cajaNombre_Paciente2.setBounds(145, 80, 125, 30);
+		IF_Bajas.add(cajaNombre_Paciente2);
 		
-		txtApPaterno = new JLabel("Apellido Paterno del Paciente");
-		txtApPaterno.setBounds(330, 80, 200, 30);
-		IF_Bajas.add(txtApPaterno);
-		cajaApPaterno_Paciente = new JTextField();
-		cajaApPaterno_Paciente.setBounds(520, 80, 125, 30);
-		IF_Bajas.add(cajaApPaterno_Paciente);
+		txtApPaterno2 = new JLabel("Apellido Paterno del Paciente");
+		txtApPaterno2.setBounds(330, 90, 200, 30);
+		IF_Bajas.add(txtApPaterno2);
+		cajaApPaterno_Paciente2 = new JTextField();
+		cajaApPaterno_Paciente2.setBounds(520, 80, 125, 30);
+		IF_Bajas.add(cajaApPaterno_Paciente2);
 		
-		txtApMaterno = new JLabel("Apellido Materno del Paciente");
-		txtApMaterno.setBounds(8, 150, 200, 30);
-		IF_Bajas.add(txtApMaterno);
-		cajaApMaterno_Paciente = new JTextField();
-		cajaApMaterno_Paciente.setBounds(180, 150, 125, 30);
-		IF_Bajas.add(cajaApMaterno_Paciente);
+		txtApMaterno2 = new JLabel("Apellido Materno del Paciente");
+		txtApMaterno2.setBounds(8, 160, 200, 30);
+		IF_Bajas.add(txtApMaterno2);
+		cajaApMaterno_Paciente2 = new JTextField();
+		cajaApMaterno_Paciente2.setBounds(180, 150, 125, 30);
+		IF_Bajas.add(cajaApMaterno_Paciente2);
 		
-		txtNumero = new JLabel("Telefono/Celular");
-		txtNumero.setBounds(330, 150 ,125, 30);
-		IF_Bajas.add(txtNumero); 
-		cajaTelefono_Paciente = new JTextField(); 
-		cajaTelefono_Paciente.setBounds(430, 150, 125, 30);
-		IF_Bajas.add(cajaTelefono_Paciente); 
+		txtNumero2 = new JLabel("Telefono/Celular");
+		txtNumero2.setBounds(330, 160 ,125, 30);
+		IF_Bajas.add(txtNumero2); 
+		cajaTelefono_Paciente2 = new JTextField(); 
+		cajaTelefono_Paciente2.setBounds(430, 150, 125, 30);
+		IF_Bajas.add(cajaTelefono_Paciente2); 
 		
 
 		
-		txtEdad = new JLabel("Edad");
-		txtEdad.setBounds(8, 215, 50, 30);
-		IF_Altas.add(txtEdad); 
-		comboBoxEdad = new JComboBox<>();
-		comboBoxEdad.setBounds(60, 215, 80, 30);
-		for (int i = 0; i < 101; i++) {
-			comboBoxEdad.addItem(""+i);
+		txtEdad2 = new JLabel("Edad");
+		txtEdad2.setBounds(8, 225, 50, 30);
+		IF_Bajas.add(txtEdad2); 
+		comboBoxEdad2 = new JComboBox<>();
+		comboBoxEdad2.setBounds(60, 225, 80, 30);
+		for (int j = 0; j < 101; j++) {
+			comboBoxEdad2.addItem(""+j);
 		}
-		IF_Bajas.add(comboBoxEdad);
+		IF_Bajas.add(comboBoxEdad2);
 		
-		txtEdad = new JLabel("Sexo");
-		txtEdad.setBounds(160, 215, 30, 30);
-		IF_Bajas.add(txtEdad); 
+		txtEdad2 = new JLabel("Sexo");
+		txtEdad2.setBounds(160, 225, 30, 30);
+		IF_Bajas.add(txtEdad2); 
 		String sexo2[] = {"Seleccione el Sexo...", "Masculino", "Femenino"}; 
-		comboBoxSexo = new JComboBox<>(sexo2);
-		comboBoxSexo.setBounds(200, 215, 150, 30);
-		IF_Bajas.add(comboBoxSexo); 
+		comboBoxSexo2 = new JComboBox<>(sexo2);
+		comboBoxSexo2.setBounds(200, 225, 150, 30);
+		IF_Bajas.add(comboBoxSexo2); 
 		
-		txtGravedad = new JLabel("Gravedad");
-		txtGravedad.setBounds(380, 215, 80, 30);
-		IF_Bajas.add(txtGravedad); 
+		txtGravedad2 = new JLabel("Gravedad");
+		txtGravedad2.setBounds(380, 225, 80, 30);
+		IF_Bajas.add(txtGravedad2); 
 		String gravedad2[] = {"Seleccione la gravedad...", "Baja", "Media", "Alta"}; 
-		comboBoxGravedad= new JComboBox<>(gravedad2);
-		comboBoxGravedad.setBounds(445, 215, 170, 30);
-		IF_Bajas.add(comboBoxGravedad); 
+		comboBoxGravedad2= new JComboBox<>(gravedad2);
+		comboBoxGravedad2.setBounds(445, 225, 170, 30);
+		IF_Bajas.add(comboBoxGravedad2); 
 		
-		txtDomicilio = new JLabel(" < =================== DATOS DEL DOMICILIO DEL PACIENTE =================== > ");
-		txtDomicilio.setBounds(80, 280, 600, 30);
-		IF_Bajas.add(txtDomicilio); 
+		txtDomicilio2 = new JLabel(" < =================== DATOS DEL DOMICILIO DEL PACIENTE =================== > ");
+		txtDomicilio2.setBounds(80, 290, 600, 30);
+		IF_Bajas.add(txtDomicilio2); 
 		
-		txtCalle = new JLabel("Calle");
-		txtCalle.setBounds(20, 330, 50, 30);
-		IF_Bajas.add(txtCalle); 
-		cajaCalle = new JTextField();
-		cajaCalle.setBounds(60, 330, 130, 30);
-		IF_Bajas.add(cajaCalle);
+		txtCalle2 = new JLabel("Calle");
+		txtCalle2.setBounds(20, 340, 50, 30);
+		IF_Bajas.add(txtCalle2); 
+		cajaCalle2 = new JTextField();
+		cajaCalle2.setBounds(60, 340, 130, 30);
+		IF_Bajas.add(cajaCalle2);
 		
-		txtColonia = new JLabel("Colonia");
-		txtColonia.setBounds(220, 330, 50, 30);
-		IF_Bajas.add(txtColonia); 
-		cajaColonia = new JTextField();
-		cajaColonia.setBounds(270, 330, 130, 30);
-		IF_Bajas.add(cajaColonia);
+		txtColonia2 = new JLabel("Colonia");
+		txtColonia2.setBounds(220, 340, 50, 30);
+		IF_Bajas.add(txtColonia2); 
+		cajaColonia2 = new JTextField();
+		cajaColonia2.setBounds(270, 340, 130, 30);
+		IF_Bajas.add(cajaColonia2);
 		
-		txtNumero = new JLabel("Numero");
-		txtNumero.setBounds(450, 330, 50, 30);
-		IF_Bajas.add(txtNumero); 
-		cajaNumero = new JTextField(); 
-		cajaNumero.setBounds(500, 330, 100, 30);
-		IF_Bajas.add(cajaNumero); 
+		txtNumero2 = new JLabel("Numero");
+		txtNumero2.setBounds(450, 340, 50, 30);
+		IF_Bajas.add(txtNumero2); 
+		cajaNumero2 = new JTextField(); 
+		cajaNumero2.setBounds(500, 340, 100, 30);
+		IF_Bajas.add(cajaNumero2); 
 		
-		txtID = new JLabel("Crée un ID para el Paciente");
-		txtID.setBounds(125, 375, 170, 30);
-		IF_Bajas.add(txtID); 
-		cajaID = new JTextField(); 
-		cajaID.setBounds(285, 373, 100, 30);
-		IF_Bajas.add(cajaID); 
+		txtID2 = new JLabel("Crée un ID para el Paciente");
+		txtID2.setBounds(125, 385, 170, 30);
+		IF_Bajas.add(txtID2); 
+		cajaID2 = new JTextField(); 
+		cajaID2.setBounds(285, 383, 100, 30);
+		IF_Bajas.add(cajaID2); 
 		
-		botonRegistrar = new JButton("REGISTRAR"); 
-		botonRegistrar.setBounds(130, 430, 140, 30);
-		botonRegistrar.setForeground(Color.black);
-		botonRegistrar.setBackground(Color.green);
-		botonRegistrar.setIcon(new ImageIcon("imagenes/verificacion.png"));
-		IF_Bajas.add(botonRegistrar);
+		botonRegistrar2 = new JButton("ELIMINAR"); 
+		botonRegistrar2.setBounds(130, 440, 140, 30);
+		botonRegistrar2.setForeground(Color.black);
+		botonRegistrar2.setBackground(Color.green);
+		botonRegistrar2.setIcon(new ImageIcon("imagenes/verificacion.png"));
+		IF_Bajas.add(botonRegistrar2);
+		botonRegistrar2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(cajaID2.getText().equals("")||cajaNombre_Paciente2.getText().equals("") || cajaApPaterno_Paciente2.getText().equals("")|| cajaApMaterno_Paciente2.getText().equals("")
+						|| cajaTelefono_Paciente2.getText().equals("") || comboBoxEdad2.getSelectedIndex() == 0 || comboBoxSexo2.getSelectedIndex()==0 || comboBoxGravedad2.getSelectedIndex()==0
+						|| cajaCalle2.getText().equals("")||cajaColonia2.getText().equals("")|| cajaNumero2.getText().equals("")) {
+					JOptionPane.showMessageDialog(getParent(), "LLENE TODOS LOS CAMPOS", "¡PSST!", JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					try {
+						boolean res  = new PacienteDAO().eliminarPaciente(cajaID2.getText());
+						JOptionPane.showMessageDialog(getParent(), "SE ELIMINÓ CORRECTAMENTE", "¡PSST!", JOptionPane.INFORMATION_MESSAGE);
+						
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(getParent(), "NO EXISTE REGISTRO EN BD");
+					}
+				}
+			}
+		});
 		
 		
 		

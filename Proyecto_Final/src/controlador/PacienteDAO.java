@@ -1,6 +1,7 @@
 package controlador;
 
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,6 +24,10 @@ public class PacienteDAO {
 		boolean res = new ConexionBD().ejecutarInstruccion(sql);
 		System.out.println(res);
 		return res; 
+	}
+	public boolean eliminarPaciente(String idPaciente) {
+		String sql = "DELETE FROM Pacientes WHERE ID_Paciente = '"+idPaciente+"'";
+		return new ConexionBD().ejecutarInstruccion(sql);
 	}
 	
 	
@@ -49,5 +54,9 @@ public class PacienteDAO {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	
+	
+	
 
 }//Class Paciente DAO
