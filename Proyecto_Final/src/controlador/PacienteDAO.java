@@ -35,9 +35,9 @@ public class PacienteDAO {
 
 			while (rs.next()) {
 				// es para obtener los datos y almacenar las filas
-				Object[] fila = new Object[10];
+				Object[] fila = new Object[11];
 				// para llenar cada columna con lo datos almacenados
-				for (int i = 0; i <10 ; i++)
+				for (int i = 0; i <11 ; i++)
 					fila[i] = rs.getObject(i + 1);
 				// es para cargar los datos en filas a la tabla modelo
 				model.addRow(fila);

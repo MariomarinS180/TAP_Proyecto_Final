@@ -23,9 +23,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+
 import controlador.PacienteDAO;
 import modelos.Paciente;
 
@@ -34,13 +38,45 @@ public class VentanasABCC extends JFrame{
 	JMenuBar menuBar;
 	JMenu menuABCC, menuTablas;
 	JMenuItem menuAltas, menuBajas, menuCambios, menuConsultas, menuSalir, menuPacientes, menuDoctores;
-	JInternalFrame IF_Altas, IF_Bajas, IF_Cambios ,IF_Consultas, IF_Salir;
+	JInternalFrame IF_Altas, IF_Bajas, IF_Cambios ,IF_Consultas, IFT_Pacientes, IF_Salir;
 	JComboBox<String> comboBoxEdad, comboBoxSexo, comboBoxGravedad; 
 	JTextField cajaNombre_Paciente, cajaApPaterno_Paciente, cajaApMaterno_Paciente, cajaCalle, 
 	cajaTelefono_Paciente, cajaColonia, cajaNumero, cajaID; 
 	JLabel txtNombre, txtApPaterno, txtApMaterno, txtDomicilio, txtTelefono, txtMotivoConsulta, txtEdad, txtSexo,
 	txtCalle, txtColonia, txtNumero, txtGravedad, txtID;  
 	JButton botonRegistrar, botonRestablecer, botonEliminar; 
+	
+	JTable mitabla1, miTabla2;
+	JScrollPane mibarra1, miBarra2;
+	
+	
+	private void mostrarDatosConTableModel() {
+		DefaultTableModel model;
+		model = new DefaultTableModel();
+		miTabla2 = new JTable();
+		miTabla2.setModel(model);
+		model.addColumn("ID Paciente");
+		model.addColumn("Nombre");
+		model.addColumn("Apellido Paterno");
+		model.addColumn("Apellido Materno");
+		model.addColumn("Teléfono Celular");
+		model.addColumn("Edad");
+		model.addColumn("Sexo");
+		model.addColumn("Gravedad");
+		model.addColumn("Calle");
+		model.addColumn("Colonia");
+		model.addColumn("Numero");
+
+		miTabla2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		miTabla2.getTableHeader().setReorderingAllowed(false);
+
+		PacienteDAO miPersonaDao2 = new PacienteDAO();
+		
+		miPersonaDao2.buscarUsuariosConTableModel(model);
+		miBarra2.setViewportView(miTabla2);
+
+	}
+	
 	
 	public VentanasABCC() {
 		getContentPane().setLayout(new BorderLayout());
@@ -60,9 +96,8 @@ public class VentanasABCC extends JFrame{
 		
 		menuBar = new JMenuBar(); 
 		menuBar = new JMenuBar();
-		menuTablas = new JMenu("TABLAS");
 		menuDoctores = new JMenuItem("DOCTORES");
-		menuPacientes = new JMenuItem("PACIENTES");
+		menuPacientes = new JMenuItem("TABLA - PACIENTES");
 		menuABCC = new JMenu("ACCESOS");
 		menuAltas = new JMenuItem("ALTAS");
 		menuBajas = new JMenuItem("BAJAS"); 
@@ -112,18 +147,27 @@ public class VentanasABCC extends JFrame{
 						}
 					});	
 		*/			
+		menuPacientes.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+					menuPacientes.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							IFT_Pacientes.setVisible(true);
+						}
+					});				
+		
+		
 		menuABCC.add(menuAltas);
 		menuABCC.add(menuBajas);
 		menuABCC.add(menuCambios);
 		menuABCC.add(menuConsultas);
+		menuABCC.add(menuPacientes);
+		menuABCC.add(menuDoctores); 
 		//menuInicio.add(menuSalir); 
-		menuTablas.add(menuDoctores);
-		menuTablas.add(menuPacientes);
-		menuBar.add(menuTablas);
 		menuBar.add(menuABCC);
 		setJMenuBar(menuBar);
 		
-		JDesktopPane desktopPane = new JDesktopPane();
+		JDesktopPane desktopPane = new JDesktopPane();	
 		
 		//-------------------------- INICIO INTERNALFRAME ALTAS -------------------------
 		IF_Altas = new JInternalFrame();
@@ -232,8 +276,6 @@ public class VentanasABCC extends JFrame{
 		cajaID.setBounds(285, 373, 100, 30);
 		IF_Altas.add(cajaID); 
 		
-		
-		
 		botonRegistrar = new JButton("REGISTRAR"); 
 		botonRegistrar.setBounds(130, 430, 140, 30);
 		botonRegistrar.setForeground(Color.black);
@@ -295,9 +337,85 @@ public class VentanasABCC extends JFrame{
 		
 		//-------------------------- INICIO INTERNALFRAME BAJAS -------------------------
 		
-		desktopPane.add(IF_Altas); 
-		add(desktopPane, BorderLayout.CENTER);
+		IF_Bajas = new JInternalFrame();
+		IF_Bajas.getContentPane().setLayout(null);
+		IF_Bajas.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		IF_Bajas.setTitle("ELIMINAR PACIENTE");
+		IF_Bajas.setSize(695, 537);
+		IF_Bajas.setMaximizable(true);
+		IF_Bajas.setIconifiable(true);
+		IF_Bajas.setClosable(true);
+		IF_Bajas.setResizable(true);
+		IF_Bajas.setLayout(null);
+		IF_Bajas.setBackground(Color.LIGHT_GRAY);
 		
+		//-------------------------- FIN INTERNALFRAME BAJAS -------------------------
+		
+		
+		//-------------------------- INICIO INTERNALFRAME CAMBIOS -------------------------
+		
+		IF_Cambios = new JInternalFrame();
+		IF_Cambios.getContentPane().setLayout(null);
+		IF_Cambios.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		IF_Cambios.setTitle("MODIFICAR PACIENTE");
+		IF_Cambios.setSize(695, 537);
+		IF_Cambios.setMaximizable(true);
+		IF_Cambios.setIconifiable(true);
+		IF_Cambios.setClosable(true);
+		IF_Cambios.setResizable(true);
+		IF_Cambios.setLayout(null);
+		IF_Cambios.setBackground(Color.LIGHT_GRAY);
+		//-------------------------- INICIO INTERNALFRAME CAMBIOS -------------------------
+		
+		
+		
+		//-------------------------- INICIO INTERNALFRAME CONSULTAS -------------------------
+		
+		IF_Consultas = new JInternalFrame();
+		IF_Consultas.getContentPane().setLayout(null);
+		IF_Consultas.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		IF_Consultas.setTitle("BUSQUEDA DE PACIENTES");
+		IF_Consultas.setSize(695, 537);
+		IF_Consultas.setMaximizable(true);
+		IF_Consultas.setIconifiable(true);
+		IF_Consultas.setClosable(true);
+		IF_Consultas.setResizable(true);
+		IF_Consultas.setLayout(null);
+		IF_Consultas.setBackground(Color.LIGHT_GRAY);
+		
+		
+		//-------------------------- FIN INTERNALFRAME CONSULTAS -------------------------
+		
+		
+		
+		//TABLAS DE LOS PACIENTES ======================================================= //
+		IFT_Pacientes = new JInternalFrame();
+		IFT_Pacientes.getContentPane().setLayout(null);
+		IFT_Pacientes.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		IFT_Pacientes.setTitle("BASE DE DATOS DE LOS PACIENTES");
+		IFT_Pacientes.setSize(695, 537);
+		IFT_Pacientes.setMaximizable(true);
+		IFT_Pacientes.setIconifiable(true);
+		IFT_Pacientes.setClosable(true);
+		IFT_Pacientes.setResizable(true);
+		IFT_Pacientes.setLayout(null);
+		IFT_Pacientes.setBackground(Color.white);
+		
+		miBarra2 = new JScrollPane(); 
+		miBarra2.setBounds(0, 100, 685, 150);
+		IFT_Pacientes.add(miBarra2);
+		mostrarDatosConTableModel();
+		
+		
+		
+		desktopPane.add(IF_Altas);
+		desktopPane.add(IF_Bajas);
+		desktopPane.add(IF_Cambios); 
+		desktopPane.add(IF_Consultas);
+		desktopPane.add(IFT_Pacientes);
+		
+		
+		add(desktopPane, BorderLayout.CENTER);
 		
 		
 		
