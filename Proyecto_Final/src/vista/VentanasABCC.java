@@ -349,6 +349,109 @@ public class VentanasABCC extends JFrame{
 		IF_Bajas.setLayout(null);
 		IF_Bajas.setBackground(Color.LIGHT_GRAY);
 		
+		
+		JLabel label_txt3 = new JLabel();
+		label_txt3.setIcon(new ImageIcon("imagenes/fondoBajas.png"));
+		label_txt3.setBounds(0, 0, 695, 60);
+		IF_Bajas.add(label_txt3);
+		
+		txtNombre = new JLabel("Nombre del Paciente");
+		txtNombre.setBounds(8, 80, 200, 30);
+		IF_Bajas.add(txtNombre);
+		cajaNombre_Paciente = new JTextField();
+		cajaNombre_Paciente.setBounds(145, 80, 125, 30);
+		IF_Bajas.add(cajaNombre_Paciente);
+		
+		txtApPaterno = new JLabel("Apellido Paterno del Paciente");
+		txtApPaterno.setBounds(330, 80, 200, 30);
+		IF_Bajas.add(txtApPaterno);
+		cajaApPaterno_Paciente = new JTextField();
+		cajaApPaterno_Paciente.setBounds(520, 80, 125, 30);
+		IF_Bajas.add(cajaApPaterno_Paciente);
+		
+		txtApMaterno = new JLabel("Apellido Materno del Paciente");
+		txtApMaterno.setBounds(8, 150, 200, 30);
+		IF_Bajas.add(txtApMaterno);
+		cajaApMaterno_Paciente = new JTextField();
+		cajaApMaterno_Paciente.setBounds(180, 150, 125, 30);
+		IF_Bajas.add(cajaApMaterno_Paciente);
+		
+		txtNumero = new JLabel("Telefono/Celular");
+		txtNumero.setBounds(330, 150 ,125, 30);
+		IF_Bajas.add(txtNumero); 
+		cajaTelefono_Paciente = new JTextField(); 
+		cajaTelefono_Paciente.setBounds(430, 150, 125, 30);
+		IF_Bajas.add(cajaTelefono_Paciente); 
+		
+
+		
+		txtEdad = new JLabel("Edad");
+		txtEdad.setBounds(8, 215, 50, 30);
+		IF_Altas.add(txtEdad); 
+		comboBoxEdad = new JComboBox<>();
+		comboBoxEdad.setBounds(60, 215, 80, 30);
+		for (int i = 0; i < 101; i++) {
+			comboBoxEdad.addItem(""+i);
+		}
+		IF_Bajas.add(comboBoxEdad);
+		
+		txtEdad = new JLabel("Sexo");
+		txtEdad.setBounds(160, 215, 30, 30);
+		IF_Bajas.add(txtEdad); 
+		String sexo2[] = {"Seleccione el Sexo...", "Masculino", "Femenino"}; 
+		comboBoxSexo = new JComboBox<>(sexo2);
+		comboBoxSexo.setBounds(200, 215, 150, 30);
+		IF_Bajas.add(comboBoxSexo); 
+		
+		txtGravedad = new JLabel("Gravedad");
+		txtGravedad.setBounds(380, 215, 80, 30);
+		IF_Bajas.add(txtGravedad); 
+		String gravedad2[] = {"Seleccione la gravedad...", "Baja", "Media", "Alta"}; 
+		comboBoxGravedad= new JComboBox<>(gravedad2);
+		comboBoxGravedad.setBounds(445, 215, 170, 30);
+		IF_Bajas.add(comboBoxGravedad); 
+		
+		txtDomicilio = new JLabel(" < =================== DATOS DEL DOMICILIO DEL PACIENTE =================== > ");
+		txtDomicilio.setBounds(80, 280, 600, 30);
+		IF_Bajas.add(txtDomicilio); 
+		
+		txtCalle = new JLabel("Calle");
+		txtCalle.setBounds(20, 330, 50, 30);
+		IF_Bajas.add(txtCalle); 
+		cajaCalle = new JTextField();
+		cajaCalle.setBounds(60, 330, 130, 30);
+		IF_Bajas.add(cajaCalle);
+		
+		txtColonia = new JLabel("Colonia");
+		txtColonia.setBounds(220, 330, 50, 30);
+		IF_Bajas.add(txtColonia); 
+		cajaColonia = new JTextField();
+		cajaColonia.setBounds(270, 330, 130, 30);
+		IF_Bajas.add(cajaColonia);
+		
+		txtNumero = new JLabel("Numero");
+		txtNumero.setBounds(450, 330, 50, 30);
+		IF_Bajas.add(txtNumero); 
+		cajaNumero = new JTextField(); 
+		cajaNumero.setBounds(500, 330, 100, 30);
+		IF_Bajas.add(cajaNumero); 
+		
+		txtID = new JLabel("Crée un ID para el Paciente");
+		txtID.setBounds(125, 375, 170, 30);
+		IF_Bajas.add(txtID); 
+		cajaID = new JTextField(); 
+		cajaID.setBounds(285, 373, 100, 30);
+		IF_Bajas.add(cajaID); 
+		
+		botonRegistrar = new JButton("REGISTRAR"); 
+		botonRegistrar.setBounds(130, 430, 140, 30);
+		botonRegistrar.setForeground(Color.black);
+		botonRegistrar.setBackground(Color.green);
+		botonRegistrar.setIcon(new ImageIcon("imagenes/verificacion.png"));
+		IF_Bajas.add(botonRegistrar);
+		
+		
+		
 		//-------------------------- FIN INTERNALFRAME BAJAS -------------------------
 		
 		
@@ -399,12 +502,16 @@ public class VentanasABCC extends JFrame{
 		IFT_Pacientes.setClosable(true);
 		IFT_Pacientes.setResizable(true);
 		IFT_Pacientes.setLayout(null);
-		IFT_Pacientes.setBackground(Color.white);
-		
+		IFT_Pacientes.setBackground(Color.DARK_GRAY);
 		miBarra2 = new JScrollPane(); 
-		miBarra2.setBounds(0, 100, 685, 150);
+		miBarra2.setBounds(0, 150, 685, 150);
 		IFT_Pacientes.add(miBarra2);
 		mostrarDatosConTableModel();
+		JLabel label_txt2 = new JLabel();
+		label_txt2.setIcon(new ImageIcon("imagenes/fondoTablaPacientes.jpg"));
+		label_txt2.setBounds(0, 0, 945, 120);
+		IFT_Pacientes.add(label_txt2);
+		
 		
 		
 		
